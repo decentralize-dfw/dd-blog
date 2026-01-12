@@ -3,272 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DFW BLOG</title>
+    
+    <!-- SEO & META TAGS -->
+    <title>DFW Journal | Metaverse Architecture & Digital Theory</title>
+    <meta name="description" content="Official research journal of Digital Forgery Workshop. Deep dives into virtual architecture, WebXR, VRM avatars, and the philosophy of the spatial web.">
+    <meta name="keywords" content="metaverse architecture, digital fashion, webxr, DFW blog, spatial web, virtual design theory">
+    <meta name="author" content="Digital Forgery Workshop">
+    <meta name="robots" content="index, follow">
+    
+    <!-- CANONICAL & CONNECTIONS -->
+    <link rel="canonical" href="https://blog.digitalforgerywork.shop/">
+    <link rel="icon" type="image/png" href="https://static.wixstatic.com/media/54a996_56caa9e7ead147e69d20cc2df96f8e95~mv2.png">
+    <link rel="me" href="https://digitalforgerywork.shop">
+
+    <!-- SCHEMA MARKUP -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "DFW Journal",
+      "url": "https://blog.digitalforgerywork.shop/",
+      "description": "Manifesto archive of Digital Forgery Workshop.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Digital Forgery Workshop",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://static.wixstatic.com/media/54a996_56caa9e7ead147e69d20cc2df96f8e95~mv2.png"
+        }
+      }
+    }
+    </script>
+
     <style>
-        /* --- RESET & BASE --- */
+        /* --- VINTAGE CONSOLE STYLES --- */
         :root {
             --font-console: 'Courier New', Courier, monospace;
             --font-comic: 'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
-            
             --color-welcome: #ffffff; 
-            --bg-welcome: #0000AA;    /* VINTAGE MAVİ */
-            
-            --color-title: #00ff00;   /* YEŞİL */
-            --color-link: #00ffff;    /* CYAN/MAVİ */
-            
-            --modal-bg: #c0c0c0; /* Windows 95 Gri */
+            --bg-welcome: #0000AA;    
+            --color-title: #00ff00;   
+            --color-link: #00ffff;    
+            --modal-bg: #c0c0c0;
             --modal-text: #000;
         }
 
         * { box-sizing: border-box; }
 
         body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            overflow: hidden;
+            margin: 0; padding: 0; height: 100vh; overflow: hidden;
             background-image: url('https://raw.githubusercontent.com/decentralize-dfw/finder/main/BACKG3.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+            background-size: cover; background-position: center; background-repeat: no-repeat;
             font-family: var(--font-console);
         }
 
-        /* --- INTRO LAYER --- */
+        /* Intro Layer */
         #intro-layer {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: var(--bg-welcome); /* VINTAGE MAVİ ARKA PLAN */
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 1.5s ease-in-out;
-            overflow: hidden;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--bg-welcome); z-index: 9999;
+            display: flex; align-items: center; justify-content: center;
+            transition: opacity 1.5s ease-in-out; overflow: hidden;
         }
-
-        /* Intro Logosu (SOL TARAFTA) */
         #intro-logo {
-            position: absolute;
-            top: 50px;
-            left: 50px;       /* SOLA ALINDI */
-            width: 250px;     /* Biraz daha derli toplu */
-            height: auto;
+            position: absolute; top: 50px; left: 50px; width: 250px; height: auto;
             image-rendering: pixelated;
         }
-
-        /* ASCII Sanatı Konteyneri (ORTADA) */
         #ascii-art-container {
-            color: #fff;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            line-height: 1.2;
-            white-space: pre;
-            text-align: center;
-            cursor: default;
-            font-weight: bold;
-            text-shadow: 2px 2px 0px #000; /* Mavi zemin üstünde görünsün diye */
+            color: #fff; font-size: 14px; line-height: 1.2; white-space: pre;
+            text-align: center; font-weight: bold; text-shadow: 2px 2px 0px #000;
         }
-
-        /* İnteraktif ASCII Karakterleri */
-        .char {
-            display: inline-block;
-            transition: transform 0.2s ease, color 0.2s ease;
-        }
-
+        .char { display: inline-block; transition: transform 0.2s ease, color 0.2s ease; }
         .char:hover {
             transform: translate(2px, -2px) rotate(10deg) scale(1.2);
-            color: #00ff00; /* Matrix Yeşili */
-            text-shadow: 0 0 5px #00ff00;
+            color: #00ff00; text-shadow: 0 0 5px #00ff00;
         }
 
-        /* Ana Ekran Animasyonlu GIF */
+        /* UI Elements */
         #main-gif {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 150px;
-            height: auto;
-            z-index: 50;
-            pointer-events: none;
+            position: fixed; top: 20px; right: 20px; width: 150px; height: auto;
+            z-index: 50; pointer-events: none;
         }
-
-        /* --- MÜZİK KONTROL BUTONU --- */
         #music-toggle {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 10000; /* En üstte */
-            font-family: var(--font-console);
-            background: #c0c0c0;
-            border-top: 2px solid #fff;
-            border-left: 2px solid #fff;
-            border-right: 2px solid #000;
-            border-bottom: 2px solid #000;
-            padding: 5px 8px;
-            cursor: pointer;
-            font-size: 11px;
-            font-weight: bold;
-            color: #000;
-            image-rendering: pixelated;
+            position: fixed; bottom: 20px; right: 20px; z-index: 10000;
+            font-family: var(--font-console); background: #c0c0c0;
+            border: 2px solid #fff; border-right: 2px solid #000; border-bottom: 2px solid #000;
+            padding: 5px 8px; cursor: pointer; font-size: 11px; font-weight: bold;
             box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
         }
         #music-toggle:active {
-            border-top: 2px solid #000;
-            border-left: 2px solid #000;
-            border-right: 2px solid #fff;
-            border-bottom: 2px solid #fff;
-            transform: translate(1px, 1px);
+            border-top: 2px solid #000; border-left: 2px solid #000;
+            border-right: 2px solid #fff; border-bottom: 2px solid #fff;
         }
 
-        /* --- ÜST KISIM (BAŞLIKLAR) --- */
+        /* BACK TO STUDIO BUTTON (Sol Alt - Ufak) */
+        #back-to-studio {
+            position: fixed; bottom: 15px; left: 15px; z-index: 10000;
+            font-family: var(--font-console); 
+            color: rgba(255,255,255,0.4); text-decoration: none;
+            font-size: 10px; border: 1px dashed rgba(255,255,255,0.2);
+            padding: 3px 6px; background: rgba(0,0,0,0.4);
+            transition: all 0.2s ease;
+        }
+        #back-to-studio:hover {
+            color: #00ff00; border-color: #00ff00; background: #000; opacity: 1;
+            transform: scale(1.05);
+        }
+
+        /* Sections */
         #top-section {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 50vh;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            pointer-events: none;
+            position: absolute; top: 0; left: 0; width: 100%; height: 50vh;
+            padding: 40px; display: flex; flex-direction: column;
+            justify-content: space-between; pointer-events: none;
         }
-
         .welcome-text {
-            font-family: var(--font-console);
-            color: var(--color-welcome);
-            background-color: var(--bg-welcome);
-            padding: 15px;
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            width: fit-content; 
+            font-family: var(--font-console); color: var(--color-welcome);
+            background-color: var(--bg-welcome); padding: 15px; font-size: 1.5rem;
+            font-weight: bold; text-transform: uppercase; width: fit-content; 
             box-shadow: 5px 5px 0px rgba(0,0,0,0.5);
         }
-
         .blog-title {
-            font-family: var(--font-comic);
-            color: var(--color-title);
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 20px;
+            font-family: var(--font-comic); color: var(--color-title);
+            font-size: 1.5rem; font-weight: bold; margin-bottom: 20px;
             text-shadow: 2px 2px 0px #000;
         }
-
-        /* --- ALT KISIM (LİSTE) --- */
         #bottom-section {
-            position: absolute;
-            top: 50vh;
-            left: 0;
-            width: 100%;
-            height: 50vh;
-            overflow-y: auto;
-            padding: 20px 40px;
+            position: absolute; top: 50vh; left: 0; width: 100%; height: 50vh;
+            overflow-y: auto; padding: 20px 40px; padding-bottom: 60px;
         }
-
         ul {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            list-style: none;
-            padding: 0;
-            margin: 0;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+            list-style: none; padding: 0; margin: 0;
         }
-
-        .file-item { text-align: left; }
-
         .file-link {
-            color: var(--color-link);
-            text-decoration: none;
-            font-size: 1rem;
-            font-weight: bold;
-            font-family: var(--font-console);
-            word-break: break-word;
-            display: block;
-            transition: transform 0.2s;
+            color: var(--color-link); text-decoration: none; font-size: 1rem;
+            font-weight: bold; display: block; transition: transform 0.2s;
+            word-break: break-word; cursor: pointer;
         }
-
         .file-link:hover {
-            color: #fff;
-            text-shadow: 0 0 8px var(--color-link);
-            transform: translateX(10px);
+            color: #fff; text-shadow: 0 0 8px var(--color-link); transform: translateX(10px);
         }
 
-        /* --- POPUP MODAL --- */
+        /* Modal */
         #modal-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 100;
-            display: none;
-            align-items: center;
-            justify-content: center;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6); z-index: 100; display: none;
+            align-items: center; justify-content: center;
         }
-
         #modal-window {
-            width: 80%;
-            max-width: 800px;
-            height: 80vh;
-            background: var(--modal-bg);
-            color: var(--modal-text);
-            border-top: 2px solid #fff;
-            border-left: 2px solid #fff;
-            border-right: 2px solid #000;
-            border-bottom: 2px solid #000;
-            box-shadow: 10px 10px 0 rgba(0,0,0,0.5);
-            display: flex;
-            flex-direction: column;
-            font-family: sans-serif;
+            width: 80%; max-width: 800px; height: 80vh; background: var(--modal-bg);
+            color: var(--modal-text); border: 2px solid #fff; border-right: 2px solid #000; border-bottom-color: #000;
+            box-shadow: 10px 10px 0 rgba(0,0,0,0.5); display: flex; flex-direction: column; font-family: sans-serif;
         }
-
         .modal-header {
-            background: #000080;
-            padding: 4px 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: #fff;
-            font-weight: bold;
+            background: #000080; padding: 4px 8px; display: flex;
+            justify-content: space-between; align-items: center; color: #fff; font-weight: bold;
         }
-
         .close-btn {
-            background: #c0c0c0;
-            border-top: 2px solid #fff;
-            border-left: 2px solid #fff;
-            border-right: 2px solid #000;
-            border-bottom: 2px solid #000;
-            padding: 2px 6px;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 12px;
+            background: #c0c0c0; border: 2px solid #fff; border-right-color: #000; border-bottom-color: #000;
+            padding: 2px 6px; font-weight: bold; cursor: pointer; font-size: 12px;
         }
-        .close-btn:active {
-            border-top: 2px solid #000;
-            border-left: 2px solid #000;
-            border-right: 2px solid #fff;
-            border-bottom: 2px solid #fff;
-        }
-
         #modal-content {
-            padding: 20px;
-            overflow-y: auto;
-            flex-grow: 1;
-            font-family: var(--font-console);
-            white-space: pre-wrap;
-            background: #fff;
-            border: 2px solid;
-            border-color: #888 #fff #fff #888;
-            margin: 10px;
-            color: #000;
-        }
-
-        ::-webkit-scrollbar { width: 12px; }
-        ::-webkit-scrollbar-track { background: #dfdfdf; }
-        ::-webkit-scrollbar-thumb { 
-            background: #c0c0c0; 
-            border: 2px solid;
-            border-color: #fff #888 #888 #fff;
+            padding: 20px; overflow-y: auto; flex-grow: 1; font-family: var(--font-console);
+            white-space: pre-wrap; background: #fff; border: 2px solid #888;
+            border-right-color: #fff; border-bottom-color: #fff; margin: 10px; color: #000;
         }
 
         @media (max-width: 700px) {
@@ -276,32 +173,60 @@
             .welcome-text { font-size: 1.2rem; }
             #intro-logo { width: 150px; left: 20px; top: 20px; }
             #ascii-art-container { font-size: 8px; }
-            #main-gif { width: 100px; }
         }
     </style>
 </head>
 <body>
 
+    <!-- 4. NOSCRIPT: BOTLAR İÇİN STATİK LİSTE (TEMİZ URL'LER) -->
+    <noscript>
+        <div style="background: white; color: black; padding: 50px; font-family: sans-serif;">
+            <h1>DFW Journal - Digital Forgery Workshop</h1>
+            <p>Official Archive of Thoughts Spanning Time regarding Metaverse, Architecture and Digital Fashion.</p>
+            <ul>
+                <li><a href="https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/main/0001_The-Digital-%C3%9Cbermensch_03dec2022">The Digital Übermensch</a></li>
+                <li><a href="https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/main/0002_The-Pros-and-Cons-of-Being-a-Metaverse-Only-Architect--The-2-minute-Guide!-%5BVIDEO%5D_09dec2022">The Pros and Cons of Being a Metaverse Only Architect</a></li>
+                <li><a href="https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/main/0003_is-Metaverse-The-Red-Pill%3F_12jan2023">Is Metaverse The Red Pill?</a></li>
+                <li><a href="https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/main/0004_Astral-Egg-Plant---Metaverse-HQ-Gathering-space_12jan2023">Astral Egg Plant</a></li>
+                <li><a href="https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/main/0005_DFW-Concept-Furniture-Store_08mar2023">DFW Concept Furniture Store</a></li>
+                <li><a href="https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/main/0006_why-virtual-furniture%3F_23jan2024">Why Virtual Furniture?</a></li>
+                <li><a href="https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/main/0007_Digital-Architecture-Theory:-Emergent-Paradigms-in-Virtual-Spatial-Design_25oct2024">Digital Architecture Theory</a></li>
+                <li><a href="https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/main/0008_Notes-from-Digital-Underground:-A-Confession-About-Virtual-Theater_26oct2024">Notes from Digital Underground</a></li>
+                <li><a href="https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/main/0009_Virtual-Furniture:-Why-Your-Digital-Space-Needs-That-Virtual-Eames-Chair_28oct2024">Virtual Furniture & Eames Chair</a></li>
+                <li><a href="https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/refs/heads/main/0010_The-Future-is-not-just-Virtual%2C-it's-ALIVE._29oct2024">The Future is ALIVE</a></li>
+                <li><a href="https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/main/0011_The-Invisible-Stage_30oct2024">The Invisible Stage</a></li>
+                <li><a href="https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/main/0012_Religious-Robotics:_31oct2024">Religious Robotics</a></li>
+                <li><a href="https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/main/0013_The-Architecture-of-Art:-Museums,-Galleries,-and-the-Space-Between._01nov2024">The Architecture of Art</a></li>
+                <li><a href="https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/main/0014_Enter-3D_19nov2024">Enter 3D</a></li>
+                <li><a href="https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/main/0015_Beyond-Buildings:-The-Coming-Revolution-in-Architectural-Consciousness..._03jan2025">Beyond Buildings</a></li>
+                <li><a href="https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/main/0016_Digital-Topographies:-Reimagining-Architecture-for-the-Metaverse_19aug2025">Digital Topographies</a></li>
+                <li><a href="https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/main/0017_zen-bubble-rider-poem_20aug2025">Zen Bubble Rider</a></li>
+                <li><a href="https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/main/0018_THE-MERMAID-CHAIR:-A-MANIFESTO-OF-DIGITAL-TRANSFORMATION_20aug2025">The Mermaid Chair Manifesto</a></li>
+                <li><a href="https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/main/0019_C2W2-RUNWAY-+-AVATARS_09sept2025">C2W2 Runway + Avatars</a></li>
+            </ul>
+        </div>
+    </noscript>
+
     <!-- SES DOSYALARI -->
     <audio id="bg-music" loop src="https://raw.githubusercontent.com/decentralize-dfw/finder/main/blog-anthem.mp3"></audio>
     <audio id="click-sound" src="https://raw.githubusercontent.com/decentralize-dfw/finder/main/click-blog.mp3"></audio>
 
-    <!-- INTRO LAYER (MAVİ EKRAN) -->
+    <!-- INTRO LAYER -->
     <div id="intro-layer">
-        <!-- SOLDA LOGO -->
         <img src="https://raw.githubusercontent.com/decentralize-dfw/finder/main/LOGO-1.png" id="intro-logo" alt="DFW Logo">
-        
-        <!-- ORTADA ASCII ART -->
         <div id="ascii-art-container"></div>
     </div>
 
-    <!-- MAIN SCREEN ANIMATED GIF (Sağ Üstte Loop) -->
-    <img src="https://raw.githubusercontent.com/decentralize-dfw/finder/main/logoanimated.gif" id="main-gif" alt="Animated Logo">
-
-    <!-- MÜZİK AÇ/KAPA BUTONU -->
+    <!-- MAIN UI -->
+    <img src="https://raw.githubusercontent.com/decentralize-dfw/finder/main/logoanimated.gif" id="main-gif" alt="DFW Animated Logo">
     <button id="music-toggle">MUSIC: ON</button>
+    
+    <!-- BACK BUTTON (SOL ALT) -->
+    <a href="https://digitalforgerywork.shop" id="back-to-studio" title="Return to Main Studio">
+        dfw.exe
+    </a>
 
-    <!-- MODAL POPUP -->
+    <!-- MODAL -->
     <div id="modal-overlay">
         <div id="modal-window">
             <div class="modal-header">
@@ -312,7 +237,7 @@
         </div>
     </div>
 
-    <!-- ÜST KISIM -->
+    <!-- CONTENT SECTIONS -->
     <div id="top-section">
         <div class="welcome-text">
             WELCOME.<br>
@@ -327,39 +252,54 @@
         </div>
     </div>
 
-    <!-- ALT KISIM -->
     <div id="bottom-section">
         <ul id="file-list">
             <li style="grid-column: 1 / -1; color:#fff;">LOADING ARCHIVE...</li>
         </ul>
-        
         <div style="margin-top:30px; font-size:0.8rem; color:#fff; opacity:0.7;">
             DFW_ARCHIVE // 2021-FUTURE
         </div>
     </div>
 
     <script>
-        const USER = 'decentralize-dfw';
-        const REPO = 'dfw-blog';
-        const FOLDER = ''; 
+        // --- 1. SABİT DOSYA LİSTESİ (SADECE BUNLAR GÖRÜNECEK) ---
+        const staticFiles = [
+            { name: "0001_The-Digital-Übermensch_03dec2022", url: "https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/main/0001_The-Digital-%C3%9Cbermensch_03dec2022" },
+            { name: "0002_The-Pros-and-Cons-of-Being-a-Metaverse-Only-Architect--The-2-minute-Guide!-[VIDEO]_09dec2022", url: "https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/main/0002_The-Pros-and-Cons-of-Being-a-Metaverse-Only-Architect--The-2-minute-Guide!-%5BVIDEO%5D_09dec2022AI%20predicts%20the%20future%20of%20being%20an%20architect%20only%20in%20the%20metaverse%20for%20the%20next%2010%20years." },
+            { name: "0003_is-Metaverse-The-Red-Pill?_12jan2023", url: "https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/main/0003_is-Metaverse-The-Red-Pill%3F_12jan2023" },
+            { name: "0004_Astral-Egg-Plant---Metaverse-HQ-Gathering-space_12jan2023", url: "https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/main/0004_Astral-Egg-Plant---Metaverse-HQ-Gathering-space_12jan2023" },
+            { name: "0005_DFW-Concept-Furniture-Store_08mar2023", url: "https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/main/0005_DFW-Concept-Furniture-Store_08mar2023" },
+            { name: "0006_why-virtual-furniture?_23jan2024", url: "https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/main/0006_why-virtual-furniture%3F_23jan2024" },
+            { name: "0007_Digital-Architecture-Theory:-Emergent-Paradigms-in-Virtual-Spatial-Design_25oct2024", url: "https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/main/0007_Digital-Architecture-Theory:-Emergent-Paradigms-in-Virtual-Spatial-Design_25oct2024" },
+            { name: "0008_Notes-from-Digital-Underground:-A-Confession-About-Virtual-Theater_26oct2024", url: "https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/main/0008_Notes-from-Digital-Underground:-A-Confession-About-Virtual-Theater_26oct2024" },
+            { name: "0009_Virtual-Furniture:-Why-Your-Digital-Space-Needs-That-Virtual-Eames-Chair_28oct2024", url: "https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/main/0009_Virtual-Furniture:-Why-Your-Digital-Space-Needs-That-Virtual-Eames-Chair_28oct2024" },
+            { name: "0010_The-Future-is-not-just-Virtual-it-is-ALIVE._29oct2024", url: "https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/refs/heads/main/0010_The-Future-is-not-just-Virtual-it-is-ALIVE._29oct2024" },
+            { name: "0011_The-Invisible-Stage_30oct2024", url: "https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/main/0011_The-Invisible-Stage_30oct2024" },
+            { name: "0012_Religious-Robotics:_31oct2024", url: "https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/main/0012_Religious-Robotics:_31oct2024" },
+            { name: "0013_The-Architecture-of-Art:-Museums,-Galleries,-and-the-Space-Between._01nov2024", url: "https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/main/0013_The-Architecture-of-Art:-Museums,-Galleries,-and-the-Space-Between._01nov2024" },
+            { name: "0014_Enter-3D_19nov2024", url: "https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/main/0014_Enter-3D_19nov2024" },
+            { name: "0015_Beyond-Buildings:-The-Coming-Revolution-in-Architectural-Consciousness..._03jan2025", url: "https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/main/0015_Beyond-Buildings:-The-Coming-Revolution-in-Architectural-Consciousness..._03jan2025" },
+            { name: "0016_Digital-Topographies:-Reimagining-Architecture-for-the-Metaverse_19aug2025", url: "https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/main/0016_Digital-Topographies:-Reimagining-Architecture-for-the-Metaverse_19aug2025" },
+            { name: "0017_zen-bubble-rider-poem_20aug2025", url: "https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/main/0017_zen-bubble-rider-poem_20aug2025" },
+            { name: "0018_THE-MERMAID-CHAIR:-A-MANIFESTO-OF-DIGITAL-TRANSFORMATION_20aug2025", url: "https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/main/0018_THE-MERMAID-CHAIR:-A-MANIFESTO-OF-DIGITAL-TRANSFORMATION_20aug2025" },
+            { name: "0019_C2W2-RUNWAY-+-AVATARS_09sept2025", url: "https://raw.githubusercontent.com/decentralize-dfw/dfw-blog/main/0019_C2W2-RUNWAY-+-AVATARS_09sept2025" }
+        ];
 
         // SES AYARLARI
         const bgMusic = document.getElementById('bg-music');
         const clickSound = document.getElementById('click-sound');
         const musicToggle = document.getElementById('music-toggle');
 
-        bgMusic.volume = 0.5; // Arkaplan müzik sesi
-        clickSound.volume = 0.3; // Tıklama sesi (hafif)
+        bgMusic.volume = 0.5; 
+        clickSound.volume = 0.3; 
 
-        // HER TIKLAMADA SES ÇAL
         document.addEventListener('click', () => {
-            clickSound.currentTime = 0; // Sesi başa sar
-            clickSound.play().catch(e => {}); // Hata olursa yoksay
+            clickSound.currentTime = 0; 
+            clickSound.play().catch(e => {}); 
         });
 
-        // MÜZİK TOGGLE İŞLEVİ
         musicToggle.addEventListener('click', (e) => {
-            e.stopPropagation(); // Global click sesini tekrar tetikleme (gerçi her türlü çalar)
+            e.stopPropagation(); 
             if (bgMusic.paused) {
                 bgMusic.play();
                 musicToggle.innerText = "MUSIC: ON";
@@ -369,34 +309,34 @@
             }
         });
 
-        // ASCII SANAT VERİSİ
+        // ASCII ART
         const asciiArt = `
-      :::::::::  :::::::::: :::       :::      
-     :+:    :+: :+:        :+:       :+:       
-    +:+    +:+ +:+        +:+       +:+        
-   +#+    +:+ :#::+::#   +#+  +:+  +#+         
-  +#+    +#+ +#+        +#+ +#+#+ +#+          
- #+#    #+# #+#         #+#+# #+#+#            
-#########  ###          ###   ###              
-      :::::::::  :::        ::::::::   ::::::::
-     :+:    :+: :+:       :+:    :+: :+:    :+:
-    +:+    +:+ +:+       +:+    +:+ +:+        
-   +#++:++#+  +#+       +#+    +:+ :#:         
-  +#+    +#+ +#+       +#+    +#+ +#+   +#+#   
- #+#    #+# #+#       #+#    #+# #+#    #+#    
-#########  ########## ########   ########      
+      :::::::::  :::::::::: :::        :::      
+     :+:    :+: :+:         :+:        :+:       
+    +:+    +:+ +:+         +:+        +:+        
+   +#+    +:+ :#::+::#    +#+  +:+  +#+          
+  +#+    +#+ +#+         +#+ +#+#+ +#+           
+ #+#    #+# #+#         #+#+# #+#+#              
+#########  ###          ###   ###               
+       :::::::::  :::         ::::::::   ::::::::
+      :+:    :+: :+:        :+:    :+: :+:    :+:
+     +:+    +:+ +:+        +:+    +:+ +:+        
+    +#++:++#+  +#+        +#+    +:+ :#:         
+   +#+    +#+ +#+        +#+    +#+ +#+    +#+#  
+  #+#    #+# #+#        #+#    #+# #+#    #+#    
+#########  ########## ########   ########        
 `;
 
         window.addEventListener('load', () => {
-            // 1. ASCII Sanatını Render Et
             renderAscii();
+            // Statik listeyi render et (API yok)
+            renderList(staticFiles, true);
 
-            // 2. Müzik Başlatma Denemesi (Otomatik)
+            // Müzik Başlat
             const playPromise = bgMusic.play();
             if (playPromise !== undefined) {
                 playPromise.catch(error => {
-                    console.log("Otomatik oynatma engellendi. İlk etkileşim bekleniyor.");
-                    // Eğer tarayıcı engellerse, ilk tıklamada başlat
+                    console.log("Autoplay blocked.");
                     document.addEventListener('click', () => {
                         if (bgMusic.paused && musicToggle.innerText === "MUSIC: ON") {
                             bgMusic.play();
@@ -405,17 +345,15 @@
                 });
             }
 
-            // 3. Intro 5 Saniye Sonra Kaybolsun
+            // Animasyon
             setTimeout(() => {
                 document.getElementById('intro-layer').style.opacity = '0';
                 setTimeout(() => {
                     document.getElementById('intro-layer').style.display = 'none';
-                    fetchFiles();
                 }, 1500);
-            }, 5000); // 5 Saniye
+            }, 5000);
         });
 
-        // ASCII Karakter Render Fonksiyonu
         function renderAscii() {
             const container = document.getElementById('ascii-art-container');
             let html = '';
@@ -442,60 +380,43 @@
                 cleanTitle = name.replace(dateRegex, '').trim();
                 cleanTitle = cleanTitle.replace(/[\-_]+$/, '').trim();
             }
+            cleanTitle = cleanTitle.replace(/^\d+[\-_]/, ''); 
+            cleanTitle = cleanTitle.replace(/[\-_]/g, ' ');
 
             return { title: cleanTitle, date: dateStr, originalName: name };
         }
 
-        async function fetchFiles() {
+        // Güvenli String Kaçış Fonksiyonu (Syntax Error Önleyici)
+        function escapeString(str) {
+            return str.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+        }
+
+        function renderList(files, clear = false) {
             const listContainer = document.getElementById('file-list');
-            try {
-                const apiUrl = `https://api.github.com/repos/${USER}/${REPO}/contents/${FOLDER}`;
-                const res = await fetch(apiUrl);
+            if (clear) listContainer.innerHTML = '';
+
+            // Ters sırala (En yeni en üstte)
+            files.sort((a, b) => b.name.localeCompare(a.name));
+
+            files.forEach(file => {
+                const parsed = parseFilename(file.name);
+                // URL zaten static listesinde mevcut
+                const fileUrl = file.url;
                 
-                // HATA KONTROLLERİ EKLENDİ
-                if (res.status === 403) {
-                     throw new Error('API Rate Limit Exceeded (GitHub limit doldu, 1 saat sonra tekrar deneyin)');
-                }
-                if (res.status === 404) {
-                     throw new Error('Repository Not Found (Repo bulunamadı veya Public değil)');
-                }
-                if (!res.ok) throw new Error(`GitHub Error: ${res.status}`);
+                // HEM Başlığı HEM DE URL'i escape etmemiz lazım çünkü URL içinde de ' işareti var
+                const safeTitle = escapeString(parsed.title);
+                const safeUrl = escapeString(fileUrl);
                 
-                const files = await res.json();
-
-                const ignored = ['index.html', 'style.css', 'README.md', 'LICENSE', 'CNAME'];
-                const postFiles = files.filter(f => 
-                    f.type === 'file' && 
-                    !ignored.includes(f.name) &&
-                    (f.name.endsWith('.txt') || f.name.endsWith('.md') || !f.name.includes('.'))
-                );
-
-                postFiles.sort((a, b) => b.name.localeCompare(a.name));
-
-                listContainer.innerHTML = '';
-                if(postFiles.length === 0) {
-                    listContainer.innerHTML = '<li>NO LOGS FOUND.</li>';
-                    return;
-                }
-
-                postFiles.forEach(file => {
-                    const parsed = parseFilename(file.name);
-                    const li = document.createElement('li');
-                    li.className = 'file-item';
-                    
-                    li.innerHTML = `
-                        <a href="#" class="file-link" onclick="openModal(event, '${file.download_url}', '${parsed.title}', '${parsed.date}')">
-                            ${parsed.title}
-                        </a>
-                    `;
-                    listContainer.appendChild(li);
-                });
-
-            } catch(e) {
-                console.error(e);
-                // Hata mesajını daha belirgin göster
-                listContainer.innerHTML = `<li style="color:red; background:rgba(0,0,0,0.8); padding:10px;">ERROR: ${e.message}</li>`;
-            }
+                const li = document.createElement('li');
+                li.className = 'file-item';
+                
+                li.innerHTML = `
+                    <a href="#" class="file-link" onclick="openModal(event, '${safeUrl}', '${safeTitle}', '${parsed.date}')">
+                        ${parsed.title}
+                    </a>
+                `;
+                listContainer.appendChild(li);
+            });
         }
 
         async function openModal(e, url, title, date) {
@@ -505,34 +426,31 @@
             const headerTitle = document.getElementById('modal-title-text'); 
             
             headerTitle.innerText = title; 
-
             modal.style.display = 'flex';
             content.innerText = 'LOADING...';
 
             try {
                 const r = await fetch(url);
+                if (!r.ok) throw new Error("File not found or network error");
                 const txt = await r.text();
                 
                 const dateHeader = `DATE=${date}\n\n`;
-                
                 content.innerHTML = '';
                 content.textContent = dateHeader + txt;
 
                 const shareLink = document.createElement('a');
                 shareLink.href = url;
                 shareLink.target = '_blank';
-                shareLink.innerText = 'SHARE';
-                
+                shareLink.innerText = 'RAW FILE [SHARE]';
                 shareLink.style.display = 'block';
                 shareLink.style.marginTop = '40px';
                 shareLink.style.fontFamily = "'Comic Sans MS', 'Comic Sans', cursive, sans-serif";
                 shareLink.style.color = 'magenta';
-                shareLink.style.fontSize = '2em'; 
+                shareLink.style.fontSize = '1.2em'; 
                 shareLink.style.textDecoration = 'underline';
                 shareLink.style.fontWeight = 'bold';
 
                 content.appendChild(shareLink);
-                
             } catch(err) {
                 content.innerText = 'Error: ' + err.message;
             }
